@@ -1,0 +1,15 @@
+E:\MoocLearning\Mooc.Shared\bin\Debug\Mooc.Shared.dll
+E:\MoocLearning\Mooc.Shared\bin\Debug\Mooc.Shared.pdb
+E:\MoocLearning\Mooc.Shared\obj\Debug\Mooc.Shared.csproj.CoreCompileInputs.cache
+E:\MoocLearning\Mooc.Shared\obj\Debug\Mooc.Shared.dll
+E:\MoocLearning\Mooc.Shared\obj\Debug\Mooc.Shared.pdb
+E:\MoocLearning\Mooc.Shared\obj\Debug\Mooc.Shared.csprojAssemblyReference.cache
+E:\MoocNovemberNew\Mooc.Shared\bin\Debug\Mooc.Shared.dll
+E:\MoocNovemberNew\Mooc.Shared\bin\Debug\Mooc.Shared.pdb
+E:\MoocNovemberNew\Mooc.Shared\obj\Debug\Mooc.Shared.csproj.CoreCompileInputs.cache
+E:\MoocNovemberNew\Mooc.Shared\obj\Debug\Mooc.Shared.dll
+E:\MoocNovemberNew\Mooc.Shared\obj\Debug\Mooc.Shared.pdb
+E:\MoocNovemberNew\Mooc.Shared\bin\Debug\log4net.dll
+E:\MoocNovemberNew\Mooc.Shared\bin\Debug\log4net.xml
+E:\MoocNovemberNew\Mooc.Shared\obj\Debug\Mooc.Shared.csproj.CopyComplete
+E:\MoocNovemberNew\Mooc.Shared\obj\Debug\Mooc.Shared.csprojAssemblyReference.cache

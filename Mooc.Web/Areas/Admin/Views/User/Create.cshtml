@@ -1,0 +1,172 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>创建用户</title>
+    @*responsive website*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>创建 用户</h1>
+    <div class="form">
+        <label for="username">用户名</label> <br />
+        <input type="text" name="username" class="username" placeholder="请输入用户名" id="userId"> <br>
+        <label for="email">邮箱</label><br />
+        <input type="text" name="email" class="email" placeholder="请输入邮箱" id="emailId" /> <br />
+        <label for="password">密码</label><br />
+        <input type="password" name="password" class="password" placeholder="请输入密码" id="passwordId" /> <br />
+        <label for="passwordrp">确认密码</label><br />
+        <input type="password" name="passwordrp" class="passwordrp" placeholder="请再次输入密码确认" id="passwordrpId" /> <br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">性别</label>
+            <div class="col-md-10">
+                <select id="gender" class="form-control" onchange="">
+                    <option value="0">选择性别</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+
+                </select>
+            </div>
+        </div>
+
+        @*<input type="radio" name="male" class="gender" onclick="myFunction(this.value)" value="male" id="genderId" />
+        <label for="male">Male</label><br>
+
+        <input type="radio" name="female" class="gender" onclick="myFunction(this.value)" value="female" id="genderId" />
+        <label for="female">Female</label><br>*@
+
+        <label for"role">用户角色</label>
+        <select name="role" id="roleId">
+            <option value="student">学生</option>
+            <option value="teacher">老师</option>
+        </select>
+        <br />
+        <label for="teacher">教员姓名</label>
+        <select name="teacher" id="teacherId">
+            <option>--请选择教师--</option>
+        </select>
+
+        <label for"major">专业</label> <br />
+        <input type="text" name="major" class"major" placeholder="请输入专业" id="majorId" /><br>
+        <button onclick="submit()" class="submit">提交</button>
+        <a class="backlink" href="../user">返回列表</a>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+</body>
+</html>
+<script>
+    search();
+    function search() {
+        $.ajax({
+            url: "@Url.Content("~/Admin/Teacher/GetTeacherList")",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                debugger;
+                if (res.code == 0) {
+                    alert(res.msg);
+                    return;
+                }
+
+                for (var i = 0; i < res.data.length; i++) {
+                    var item = res.data[i];
+
+                    $('#teacherId').append(item.TeacherName);
+                }
+                //$.each(res.data, function () {
+                //    $("#teacherId").append($("<option></option>").val(value.Id).html(value.TeacherName));
+                //});
+            },
+            error: function (Result) {
+                alert("Error");
+            }
+        });
+    };
+
+    function myFunction(gender) {
+        //document.getElementById("result").value = browser;
+        var gender = localStorage.getItem("gender");
+        if (gender) {
+            $("#genderId").val(gender);
+        }
+    }
+
+    function submit() {
+
+        var username = $.trim($("#userId").val());
+        if (username == "") {
+            alert("用户不能为空");
+            return;
+        }
+
+        var email = $.trim($("#emailId").val());
+        if (email == "") {
+            alert("邮箱不能为空");
+            return;
+        }
+
+        var password = $.trim($("#passwordId").val());
+        if (password == "") {
+            alert("密码不能为空");
+            return;
+        }
+
+        var passwordrp = $.trim($("#passwordrpId").val());
+        if (passwordrp == "") {
+            alert("密码不能为空");
+            return;
+        }
+        else if(passwordrp != password) {
+            alert("密码输入不一致");
+
+        }
+
+        var role = $.trim($("#roleId").val());
+        if (role == "") {
+             alert("用户角色不能为空");
+             return;
+        }
+
+        var gender = $("#gender").val();
+        if (!gender) {
+            alert("请选择课性别")
+            return;
+        }
+
+        var major = $.trim($("#majorId").val());
+        if (major == "") {
+            alert("专业不能为空");
+            return;
+        }
+
+        var parm = {};
+        parm.UserName = username;
+        parm.Role = role;
+        parm.Gender = gender;
+        parm.Major = major;
+        parm.Email = email;
+        parm.PassWord = password;
+
+        $.ajax({
+            url: "@Url.Content("~/Admin/User/Create")",
+            //data: { "UserName": username, "Role": role, "Gender": gender, "Major": major, "Email": email, "PassWord":password},
+            data:parm,
+            type: "POST", dataType: 'json',
+            success: function (data) {
+
+                    if (data.code == 0) {
+                        window.location = "@Url.Content("~/Admin/User/Index")";
+                    }
+                    else {
+                        alert(data.msg)
+                        //return false;
+                    }
+                }
+        })
+    }
+</script>
