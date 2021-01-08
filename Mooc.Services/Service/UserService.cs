@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Mooc.DataAccess.Context;
+using Mooc.Dtos.Base;
 using Mooc.Dtos.User;
 using Mooc.Models.Entities;
 using Mooc.Services.Interfaces;
@@ -110,11 +111,15 @@ namespace Mooc.Services.Service
             return Mapper.Map<UserDto>(user);
         }
 
-        public List<UserDto> GetListByPage(int pageIndex, int pageSize, ref int totalCount)
+        public PageResult<UserDto> GetListByPage(int pageSize, int pageNumber)
         {
-            totalCount = _db.Users.Count();
-            var users = _db.Users.OrderBy(p=>p.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            return Mapper.Map<List<UserDto>>(users);
+            PageResult<UserDto> pageResult = new PageResult<UserDto>();
+            pageResult.Count = _db.Users.Count();
+
+            var list = _db.Users.OrderBy(p=>p.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            pageResult.data = Mapper.Map<List<UserDto>>(list);
+            return pageResult;
+
         }
     }
 }

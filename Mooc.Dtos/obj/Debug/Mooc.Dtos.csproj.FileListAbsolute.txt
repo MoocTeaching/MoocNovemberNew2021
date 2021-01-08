@@ -18,3 +18,14 @@ E:\MoocNovemberNew\Mooc.Dtos\obj\Debug\Mooc.Dtos.dll
 E:\MoocNovemberNew\Mooc.Dtos\obj\Debug\Mooc.Dtos.pdb
 E:\MoocNovemberNew\Mooc.Dtos\bin\Debug\log4net.dll
 E:\MoocNovemberNew\Mooc.Dtos\bin\Debug\log4net.xml
+D:\GHub\MoocNovemberNew2021\Mooc.Dtos\bin\Debug\Mooc.Dtos.dll
+D:\GHub\MoocNovemberNew2021\Mooc.Dtos\bin\Debug\Mooc.Dtos.pdb
+D:\GHub\MoocNovemberNew2021\Mooc.Dtos\bin\Debug\log4net.dll
+D:\GHub\MoocNovemberNew2021\Mooc.Dtos\bin\Debug\Mooc.Shared.dll
+D:\GHub\MoocNovemberNew2021\Mooc.Dtos\bin\Debug\Mooc.Shared.pdb
+D:\GHub\MoocNovemberNew2021\Mooc.Dtos\bin\Debug\log4net.xml
+D:\GHub\MoocNovemberNew2021\Mooc.Dtos\obj\Debug\Mooc.Dtos.csprojAssemblyReference.cache
+D:\GHub\MoocNovemberNew2021\Mooc.Dtos\obj\Debug\Mooc.Dtos.csproj.CoreCompileInputs.cache
+D:\GHub\MoocNovemberNew2021\Mooc.Dtos\obj\Debug\Mooc.Dtos.csproj.CopyComplete
+D:\GHub\MoocNovemberNew2021\Mooc.Dtos\obj\Debug\Mooc.Dtos.dll
+D:\GHub\MoocNovemberNew2021\Mooc.Dtos\obj\Debug\Mooc.Dtos.pdb

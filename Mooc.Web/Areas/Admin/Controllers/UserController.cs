@@ -22,18 +22,11 @@ namespace Mooc.Web.Areas.Admin.Controllers
     public class UserController : Controller
     {
         // GET: Admin/User
-        
+
         public ActionResult Index()
         {
-            //HttpContext.Session[]
-            //var obj = Session["userid"];
-            //if (obj == null)
-            //{
-            //    return RedirectToAction("Index", "Login");
-
-            //}
-            //throw new Exception("Index");
-            return View();
+            var list = _userService.GetList();
+            return View(list);
         }
 
         private IUserService _userService;
@@ -53,21 +46,15 @@ namespace Mooc.Web.Areas.Admin.Controllers
             return View();
         }
 
-        [HttpPost]
-        public JsonResult GetUserList(int pageIndex,int pageSize)
+        [HttpGet]
+        public JsonResult GetUserListByPage(int pageSize, int pageNumber)
         {
-            //throw new Exception("Index");
-            PageResult<UserDto> result = new PageResult<UserDto>();
-            int totalCount=0;
-            var listview = _userService.GetListByPage(pageIndex, pageSize,ref totalCount);
-            result.PageSize = pageSize;
-            result.data = listview;
-            result.Count = totalCount;
-            return Json(result);
+            var result = _userService.GetListByPage(pageSize, pageNumber);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         //Add Create user
-         [HttpPost]
+        [HttpPost]
 
          public async Task<JsonResult> Create(CreateOrUpdateUserDto createorUpdateUserDto)
         {

@@ -1,4 +1,5 @@
 ﻿using Mooc.Core.IDependency;
+using Mooc.Dtos.Base;
 using Mooc.Dtos.User;
 using Mooc.Models.Entities;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Mooc.Services.Interfaces
 
         List<UserDto> GetList();
 
-        List<UserDto> GetListByPage(int pageIndex, int pageSize, ref int totalCount);
+        PageResult<UserDto> GetListByPage(int pageSize,int pageNumber);
 
         Task<UserDto> GetUser(int id);
         Task<UserDto> GetUser(string userName);
