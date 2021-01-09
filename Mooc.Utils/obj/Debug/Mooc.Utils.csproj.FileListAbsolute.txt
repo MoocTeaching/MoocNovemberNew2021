@@ -22,3 +22,12 @@ E:\MoocNovemberNew\Mooc.Utils\bin\Debug\log4net.dll
 E:\MoocNovemberNew\Mooc.Utils\bin\Debug\log4net.xml
 E:\MoocNovemberNew\Mooc.Utils\obj\Debug\Mooc.Utils.csproj.CopyComplete
 E:\MoocNovemberNew\Mooc.Utils\obj\Debug\Mooc.Utils.csprojAssemblyReference.cache
+E:\MoocNovemberNew2021\Mooc.Utils\bin\Debug\Mooc.Utils.dll.config
+E:\MoocNovemberNew2021\Mooc.Utils\bin\Debug\Mooc.Utils.dll
+E:\MoocNovemberNew2021\Mooc.Utils\bin\Debug\Mooc.Utils.pdb
+E:\MoocNovemberNew2021\Mooc.Utils\bin\Debug\log4net.dll
+E:\MoocNovemberNew2021\Mooc.Utils\bin\Debug\log4net.xml
+E:\MoocNovemberNew2021\Mooc.Utils\obj\Debug\Mooc.Utils.csproj.CoreCompileInputs.cache
+E:\MoocNovemberNew2021\Mooc.Utils\obj\Debug\Mooc.Utils.csproj.CopyComplete
+E:\MoocNovemberNew2021\Mooc.Utils\obj\Debug\Mooc.Utils.dll
+E:\MoocNovemberNew2021\Mooc.Utils\obj\Debug\Mooc.Utils.pdb

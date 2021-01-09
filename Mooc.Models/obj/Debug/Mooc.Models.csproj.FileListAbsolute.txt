@@ -28,3 +28,15 @@ E:\MoocNovemberNew\Mooc.Models\obj\Debug\Mooc.Models.pdb
 E:\MoocNovemberNew\Mooc.Models\bin\Debug\log4net.dll
 E:\MoocNovemberNew\Mooc.Models\bin\Debug\log4net.xml
 E:\MoocNovemberNew\Mooc.Models\obj\Debug\Mooc.Models.csprojAssemblyReference.cache
+E:\MoocNovemberNew2021\Mooc.Models\bin\Debug\Mooc.Models.dll
+E:\MoocNovemberNew2021\Mooc.Models\bin\Debug\Mooc.Models.pdb
+E:\MoocNovemberNew2021\Mooc.Models\bin\Debug\EntityFramework.dll
+E:\MoocNovemberNew2021\Mooc.Models\bin\Debug\EntityFramework.SqlServer.dll
+E:\MoocNovemberNew2021\Mooc.Models\bin\Debug\log4net.dll
+E:\MoocNovemberNew2021\Mooc.Models\bin\Debug\EntityFramework.xml
+E:\MoocNovemberNew2021\Mooc.Models\bin\Debug\EntityFramework.SqlServer.xml
+E:\MoocNovemberNew2021\Mooc.Models\bin\Debug\log4net.xml
+E:\MoocNovemberNew2021\Mooc.Models\obj\Debug\Mooc.Models.csproj.CoreCompileInputs.cache
+E:\MoocNovemberNew2021\Mooc.Models\obj\Debug\Mooc.Models.csproj.CopyComplete
+E:\MoocNovemberNew2021\Mooc.Models\obj\Debug\Mooc.Models.dll
+E:\MoocNovemberNew2021\Mooc.Models\obj\Debug\Mooc.Models.pdb
