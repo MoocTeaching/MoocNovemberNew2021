@@ -1,0 +1,88 @@
+﻿
+@Model CreateOrUpdateUserDto
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>编辑用户</title>
+    @*responsive website*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h1>编辑 教师</h1>
+    <div class="form">
+        <label for="username">用户名</label> <br />
+        <input type="text" name="username" class="username" id="usernametext" value="@Model.UserName"> <br />
+
+        <label for="email">邮箱</label><br />
+        <input type="text" name="email" class="email" id="emailId" value="@Model.Email"> <br>
+
+        <label for="major">专业</label> <br>
+        <input type="text" name="major" class="major" id="majorId" value="@Model.Major"> <br>
+
+        <label for="gender">性别</label> <br>
+        <input type="text" name="gender" class="gender" id="genderId" value="@Model.Gender"> <br>
+
+        <br>
+        <button onclick="submit()" class="submit">修改</button> <br />
+        <a class="backlink" href="../index">返回列表</a>
+
+
+        <input type="hidden" name="department" class="Id" id="Id" value="@Model.Id"> <br>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+</body>
+</html>
+<script>
+    function submit() {
+        var username = $.trim($("#usernametext").val());
+        if (username == "") {
+            alert("姓名不能为空");
+            return;
+        }
+
+        var email = $.trim($("#emailId").val());
+        if (email == "") {
+            alert("邮箱不能为空");
+            return;
+        }
+        var major = $.trim($("#majorId").val());
+        if (major == "") {
+            alert("专业不能为空");
+            return;
+        }
+        var gender = $.trim($("#genderId").val());
+        if (gender == "") {
+            alert("性别不能为空");
+            return;
+        }
+
+        var parm = {};
+        parm.UserName = username;
+        parm.Major = major;
+        parm.Email = email;
+        parm.Gender = gender;
+        parm.Id = $.trim($("#Id").val());
+
+        $.ajax({
+            url: "@Url.Content("~/Admin/User/Edit")",
+            data: parm,
+
+            type: "POST", dataType: 'json',
+            success: function (data) {
+                if (data.code == 0) {
+                    window.location = "@Url.Content("~/Admin/User/Index")";
+                }
+                else {
+                    alert(data.msg)
+                }
+            }
+        })
+
+    }
+</script>

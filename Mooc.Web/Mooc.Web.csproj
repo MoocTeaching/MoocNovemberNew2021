@@ -234,6 +234,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Teacher\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jqPaginator.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

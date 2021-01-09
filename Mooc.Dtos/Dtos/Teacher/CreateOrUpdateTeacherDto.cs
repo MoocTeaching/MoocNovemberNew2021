@@ -36,5 +36,8 @@ namespace Mooc.Dtos.Teacher
         public string Introduction { get; set; }
 
         public DateTime AddTime { get; set; }
+
+        public string MongodbImgId { get; set; }
+
     }
 }

@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Base\BaseEntityDto.cs" />
     <Compile Include="Base\PageResult.cs" />
+    <Compile Include="Dtos\Subject\CreateOrUpdateSubjectDto.cs" />
+    <Compile Include="Dtos\Subject\SubjectDto.cs" />
     <Compile Include="Dtos\Teacher\CreateOrUpdateTeacherDto.cs" />
     <Compile Include="Dtos\UserImageInfoDto.cs" />
     <Compile Include="Dtos\User\CreateOrUpdateUserDto.cs" />
