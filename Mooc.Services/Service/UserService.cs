@@ -84,16 +84,33 @@ namespace Mooc.Services.Service
         }
 
         //Update Edit items
-        public bool Update(CreateOrUpdateUserDto updateUser)
+        public async Task<bool> Update(CreateOrUpdateUserDto updateUserDto)
         {
-            //var user = Mapper.Map<User>(updateUser);
-            //this._db.Users.Add(user);
-            //this._db.Entry(user).State = EntityState.Modified;
-            
-            return this._db.SaveChanges() > 0;
+            try
+            {
+                var user = this._db.Users.FirstOrDefault(p => p.Id == updateUserDto.Id);
+
+                Mapper.Map<CreateOrUpdateUserDto, User>(updateUserDto, user);
+                user.AddTime = DateTime.Now;
+                //var teacher = Mapper.Map<Teacher>(updateTeacher);
+                //this._db.Teachers.Add(teacher);
+                return await this._db.SaveChangesAsync() > 0;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    //Log.Error(eve.Entry.Entity.GetType().Name.ToString());
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+
+                throw;
+            }
         }
-
-
 
         public List<UserDto> GetLoginUser(string email, string password)
         {

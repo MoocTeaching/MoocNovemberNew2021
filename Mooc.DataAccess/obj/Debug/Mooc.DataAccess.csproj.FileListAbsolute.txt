@@ -154,3 +154,5 @@ D:\GHub\MoocNovemberNew2021\Mooc.DataAccess\obj\Debug\Mooc.DataAccess.dll
 D:\GHub\MoocNovemberNew2021\Mooc.DataAccess\obj\Debug\Mooc.DataAccess.pdb
 D:\GHub\MoocNovemberNew2021\Mooc.DataAccess\obj\Debug\Mooc.DataAccess.Migrations.Addsubjecttable.resources
 D:\GHub\MoocNovemberNew2021\Mooc.DataAccess\obj\Debug\Mooc.DataAccess.csproj.GenerateResource.cache
+D:\GHub\MoocNovemberNew2021\Mooc.DataAccess\obj\Debug\Mooc.DataAccess.Migrations.addmongodbidtoteacher.resources
+D:\GHub\MoocNovemberNew2021\Mooc.DataAccess\obj\Debug\Mooc.DataAccess.Migrations.temp.resources

@@ -56,7 +56,7 @@ namespace Mooc.Web.Areas.Admin.Controllers
         //Add Create user
         [HttpPost]
 
-         public async Task<JsonResult> Create(CreateOrUpdateUserDto createorUpdateUserDto)
+        public async Task<JsonResult> Create(CreateOrUpdateUserDto createorUpdateUserDto)
         {
             CreateOrUpdateUserDto addusr = new CreateOrUpdateUserDto();
 
@@ -105,40 +105,6 @@ namespace Mooc.Web.Areas.Admin.Controllers
             }
         }
 
-        //public async Task<JsonResult> ajCreate(string username, string gender, string role, string major)
-        //{
-        //    CreateOrUpdateUserDto addusr = new CreateOrUpdateUserDto();
-
-        //    try
-        //    {
-        //        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(gender) || string.IsNullOrEmpty(role) || string.IsNullOrEmpty(major))
-        //        {
-        //            return Json(new { code = 1, msg = "用户名，性别，角色，专业不能为空" });
-        //        }
-        //        else
-        //        {
-        //            //
-        //            //Add user to db.
-        //            //
-        //            addusr.UserName = username;
-        //            addusr.Gender = gender;
-        //            //addusr.RoleType = ;
-        //            addusr.Major = major;
-
-        //            await this._userService.Add(addusr);
-
-        //            return Json(new { code = 0 });
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //       Console.WriteLine(e.Message);
-        //       throw;
-        //    }
-
-        //}
-
-       
 
         public async Task<JsonResult> DeleteUser(int? DeleteID)
         {
@@ -193,7 +159,7 @@ namespace Mooc.Web.Areas.Admin.Controllers
                         
                         user.PassWord = pwd;
                         
-                        if (_userService.Update(Mapper.Map<CreateOrUpdateUserDto>(user)))
+                        if (await _userService.Update(Mapper.Map<CreateOrUpdateUserDto>(user)))
                         {
                             return Json(new { code = 0, msg = " 密码重置为" + newpassword });
                         }
@@ -215,47 +181,51 @@ namespace Mooc.Web.Areas.Admin.Controllers
             }
         }
 
-        //// Edit Password
-        //[HttpPost]
 
-        //public async Task<JsonResult> Edit(int? id)
-        //{
-        //    try
-        //    {
-        //        if (id == null)
-        //        {
-        //            return Json(new { code = 1, msg = "用户名ID错误" });
-        //        }
-        //        else
-        //        {
-        //            var user = await this._userService.GetEditUser(id.Value);
+        public async Task<ActionResult> Edit(int id)
+        {
+            var user = await _userService.GetEditUser(id);
+            return View(user);
+        }
 
-        //            if (user != null)
-        //            {
-        //                //Generate Random 12 digit password
-        //                string newpassword = Membership.GeneratePassword(12, 1);
-        //                string pwd = MD5Help.MD5Encoding(newpassword, ConfigurationManager.AppSettings["sKey"].ToString());
-        //                user.PassWord = pwd;
-        //                if (_userService.Update(Mapper.Map<CreateOrUpdateUserDto>(user)))
-        //                {
-        //                    return Json(new { code = 0, msg = " 密码重置为" + newpassword });
-        //                }
-        //                else
-        //                {
-        //                    return Json(new { code = 1, msg = "密码重置失败，检查数据库连接！" });
-        //                }
-        //            }
-        //            else
-        //            {
-        //                return Json(new { code = 1, msg = "不能找到相应用户" });
-        //            }
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e.Message);
-        //        throw;
-        //    }
-        //}
+
+        [HttpPost]
+
+        public async Task<JsonResult> Edit(CreateOrUpdateUserDto createOrUpdateUserDto)
+        {
+            //CreateOrUpdateTeacherDto updateTeacher = new CreateOrUpdateTeacherDto();
+
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    var c = ModelState;
+
+                    StringBuilder stringBuilder = new StringBuilder();
+                    foreach (var key in ModelState.Keys)
+                    {
+                        var modelstate = ModelState[key];
+                        if (modelstate.Errors.Any())
+                        {
+                            foreach (var item in modelstate.Errors)
+                            {
+                                stringBuilder.AppendLine(item.ErrorMessage);
+                            }
+                        }
+                    }
+                    return Json(new { code = 1, msg = stringBuilder.ToString() });
+                }
+                else
+                {
+                    await this._userService.Update(createOrUpdateUserDto);
+                    return Json(new { code = 0 });
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+        }
     }
 }

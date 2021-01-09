@@ -131,7 +131,7 @@ namespace Mooc.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                this._userService.Update(user);
+                //await this._userService.Update(user);
             }
 
             return View(user);

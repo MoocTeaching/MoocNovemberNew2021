@@ -92,7 +92,7 @@
                         var _html = "";
 
                         for (var i = 0; i < data.length; i++) {
-
+                            debugger;
                             var item = data[i];
                             _html += "<tr>";
                             _html += "<td>" + item.UserName + "</td>";
@@ -101,9 +101,9 @@
                             _html += "<td>" + item.StudentNo + "</td>";
                             _html += "<td>" + item.StatusName + "</td>";
                             _html += "<td>" + item.RoleName + "</td>";
-                            _html += "<td><a href='@Url.Content("/Admin/User/Edit/")" + item.id + "' class = 'fa-pencil-square-o' style = 'font-size:20px'>编辑</a>";
-                            _html += "<a href='javascript:void(0);' onclick='Reset(" + item.id + ")'class = 'fa-pencil-square-o' style = 'font-size:20px'>重置密码</a>";
-                            _html += "<a href='javascript:void(0);' onclick='Delete(" + item.id + ")' class = 'fa-trash' style = 'font-size:20px;margin-left:10px;' title='删除用户'></a></td>";
+                            _html += "<td><a href='@Url.Content("/Admin/User/Edit/")" + item.Id + "' class = 'fa-pencil-square-o' style = 'font-size:20px'> 编辑 </a>";
+                            _html += "<a href='javascript:void(0);' onclick='Reset(" + item.Id + ")'class = 'fa-pencil-square-o' style = 'font-size:20px'> 重置</a>";
+                            _html += "<a href='javascript:void(0);' onclick='Delete(" + item.Id + ")' class = 'fa-trash' style = 'font-size:20px;margin-left:10px;'>删除</a></td>";
                             _html += "</tr>";
                         }
 
@@ -124,7 +124,8 @@
             success: function(data) {
                 if (data.code == 0) {
                     alert("学员删除成功");
-                    window.location = "@Url.Content("~/Admin/User/List")";
+                    //window.location = "@Url.Content("~/Admin/User/List")";
+                    getUser();
                 } else {
                     alert(data.msg)
                     return false;

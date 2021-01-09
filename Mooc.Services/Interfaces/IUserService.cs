@@ -20,7 +20,7 @@ namespace Mooc.Services.Interfaces
 
         Task<CreateOrUpdateUserDto> GetEditUser(int id);
 
-        bool Update(CreateOrUpdateUserDto updateUser);
+        Task<bool> Update(CreateOrUpdateUserDto updateUser);
 
         bool Delete(int deleteUser);
         

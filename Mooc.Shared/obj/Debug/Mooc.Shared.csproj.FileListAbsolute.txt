@@ -21,3 +21,4 @@ D:\GHub\MoocNovemberNew2021\Mooc.Shared\obj\Debug\Mooc.Shared.csproj.CoreCompile
 D:\GHub\MoocNovemberNew2021\Mooc.Shared\obj\Debug\Mooc.Shared.csproj.CopyComplete
 D:\GHub\MoocNovemberNew2021\Mooc.Shared\obj\Debug\Mooc.Shared.dll
 D:\GHub\MoocNovemberNew2021\Mooc.Shared\obj\Debug\Mooc.Shared.pdb
+D:\GHub\MoocNovemberNew2021\Mooc.Shared\obj\Debug\Mooc.Shared.csprojAssemblyReference.cache

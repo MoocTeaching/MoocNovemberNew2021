@@ -31,3 +31,4 @@ D:\GHub\MoocNovemberNew2021\Mooc.Utils\obj\Debug\Mooc.Utils.csproj.CoreCompileIn
 D:\GHub\MoocNovemberNew2021\Mooc.Utils\obj\Debug\Mooc.Utils.csproj.CopyComplete
 D:\GHub\MoocNovemberNew2021\Mooc.Utils\obj\Debug\Mooc.Utils.dll
 D:\GHub\MoocNovemberNew2021\Mooc.Utils\obj\Debug\Mooc.Utils.pdb
+D:\GHub\MoocNovemberNew2021\Mooc.Utils\obj\Debug\Mooc.Utils.csprojAssemblyReference.cache

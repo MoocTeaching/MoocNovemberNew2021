@@ -115,6 +115,14 @@
     <Compile Include="Migrations\202101081048018_Add subject table.designer.cs">
       <DependentUpon>202101081048018_Add subject table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101090034409_add mongodb id to teacher.cs" />
+    <Compile Include="Migrations\202101090034409_add mongodb id to teacher.designer.cs">
+      <DependentUpon>202101090034409_add mongodb id to teacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101090141360_temp.cs" />
+    <Compile Include="Migrations\202101090141360_temp.designer.cs">
+      <DependentUpon>202101090141360_temp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -141,6 +149,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202101081048018_Add subject table.resx">
       <DependentUpon>202101081048018_Add subject table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101090034409_add mongodb id to teacher.resx">
+      <DependentUpon>202101090034409_add mongodb id to teacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101090141360_temp.resx">
+      <DependentUpon>202101090141360_temp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
