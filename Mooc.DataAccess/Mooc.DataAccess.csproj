@@ -111,13 +111,17 @@
     <Compile Include="Entities\EntityConfig\StudentDbModelBuilder.cs" />
     <Compile Include="Entities\EntityConfig\TeacherDbModelBuilder.cs" />
     <Compile Include="Entities\EntityConfig\UserDbModelBuilder.cs" />
-    <Compile Include="Migrations\202012301451307_intiDB.cs" />
-    <Compile Include="Migrations\202012301451307_intiDB.designer.cs">
-      <DependentUpon>202012301451307_intiDB.cs</DependentUpon>
+    <Compile Include="Migrations\202101081048018_Add subject table.cs" />
+    <Compile Include="Migrations\202101081048018_Add subject table.designer.cs">
+      <DependentUpon>202101081048018_Add subject table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202101030318355_01032021.cs" />
-    <Compile Include="Migrations\202101030318355_01032021.designer.cs">
-      <DependentUpon>202101030318355_01032021.cs</DependentUpon>
+    <Compile Include="Migrations\202101090034409_add mongodb id to teacher.cs" />
+    <Compile Include="Migrations\202101090034409_add mongodb id to teacher.designer.cs">
+      <DependentUpon>202101090034409_add mongodb id to teacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101090141360_temp.cs" />
+    <Compile Include="Migrations\202101090141360_temp.designer.cs">
+      <DependentUpon>202101090141360_temp.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,17 +142,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202012301451307_intiDB.resx">
-      <DependentUpon>202012301451307_intiDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101030318355_01032021.resx">
-      <DependentUpon>202101030318355_01032021.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
     <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202101081048018_Add subject table.resx">
+      <DependentUpon>202101081048018_Add subject table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101090034409_add mongodb id to teacher.resx">
+      <DependentUpon>202101090034409_add mongodb id to teacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101090141360_temp.resx">
+      <DependentUpon>202101090141360_temp.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Mooc.DataAccess.Context;
+using Mooc.Dtos.Base;
 using Mooc.Dtos.User;
 using Mooc.Models.Entities;
 using Mooc.Services.Interfaces;
@@ -83,16 +84,33 @@ namespace Mooc.Services.Service
         }
 
         //Update Edit items
-        public bool Update(CreateOrUpdateUserDto updateUser)
+        public async Task<bool> Update(CreateOrUpdateUserDto updateUserDto)
         {
-            //var user = Mapper.Map<User>(updateUser);
-            //this._db.Users.Add(user);
-            //this._db.Entry(user).State = EntityState.Modified;
-            
-            return this._db.SaveChanges() > 0;
+            try
+            {
+                var user = this._db.Users.FirstOrDefault(p => p.Id == updateUserDto.Id);
+
+                Mapper.Map<CreateOrUpdateUserDto, User>(updateUserDto, user);
+                user.AddTime = DateTime.Now;
+                //var teacher = Mapper.Map<Teacher>(updateTeacher);
+                //this._db.Teachers.Add(teacher);
+                return await this._db.SaveChangesAsync() > 0;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    //Log.Error(eve.Entry.Entity.GetType().Name.ToString());
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+
+                throw;
+            }
         }
-
-
 
         public List<UserDto> GetLoginUser(string email, string password)
         {
@@ -110,11 +128,15 @@ namespace Mooc.Services.Service
             return Mapper.Map<UserDto>(user);
         }
 
-        public List<UserDto> GetListByPage(int pageIndex, int pageSize, ref int totalCount)
+        public PageResult<UserDto> GetListByPage(int pageSize, int pageNumber)
         {
-            totalCount = _db.Users.Count();
-            var users = _db.Users.OrderBy(p=>p.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            return Mapper.Map<List<UserDto>>(users);
+            PageResult<UserDto> pageResult = new PageResult<UserDto>();
+            pageResult.Count = _db.Users.Count();
+
+            var list = _db.Users.OrderBy(p=>p.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            pageResult.data = Mapper.Map<List<UserDto>>(list);
+            return pageResult;
+
         }
     }
 }

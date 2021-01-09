@@ -31,5 +31,6 @@ namespace Mooc.Dtos.Teacher
 
         [Display(Name = "加入时间")]
         public DateTime AddTime { get; set; }
+        public string MongodbImgId { get; set; }
     }
 }
