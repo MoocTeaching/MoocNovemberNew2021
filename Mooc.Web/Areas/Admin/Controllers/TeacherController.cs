@@ -4,6 +4,7 @@ using Mooc.Services.Interfaces;
 using Mooc.Web.Areas.Admin.Attribute;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +17,12 @@ namespace Mooc.Web.Areas.Admin.Controllers
     public class TeacherController : Controller
     {
         private ITeacherService _teacherService;
+        private IUserImageInfoService _iUserImageInfoService;
 
-        public TeacherController(ITeacherService teacherService)
+        public TeacherController(ITeacherService teacherService, IUserImageInfoService iUserImageInfoService)
         {
             this._teacherService = teacherService;
+            this._iUserImageInfoService = iUserImageInfoService;
         }
 
         public ActionResult Index()
@@ -48,10 +51,10 @@ namespace Mooc.Web.Areas.Admin.Controllers
         [HttpGet]
         public JsonResult GetTeacherListByPage(int pageSize, int pageNumber)
         {
-            var result = _teacherService.GetListByPage(pageSize,pageNumber);
+            var result = _teacherService.GetListByPage(pageSize, pageNumber);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        
+
         public async Task<JsonResult> DeleteTeacher(int? DeleteID)
         {
             try
@@ -90,17 +93,17 @@ namespace Mooc.Web.Areas.Admin.Controllers
 
             try
             {
-                if(!ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     var c = ModelState;
 
                     StringBuilder stringBuilder = new StringBuilder();
-                    foreach(var key in ModelState.Keys)
+                    foreach (var key in ModelState.Keys)
                     {
                         var modelstate = ModelState[key];
-                        if(modelstate.Errors.Any())
+                        if (modelstate.Errors.Any())
                         {
-                            foreach(var item in modelstate.Errors)
+                            foreach (var item in modelstate.Errors)
                             {
                                 stringBuilder.AppendLine(item.ErrorMessage);
                             }
@@ -121,7 +124,7 @@ namespace Mooc.Web.Areas.Admin.Controllers
                     return Json(new { code = 0 });
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 throw;
@@ -178,6 +181,53 @@ namespace Mooc.Web.Areas.Admin.Controllers
                 Console.WriteLine(e.Message);
                 throw;
             }
+        }
+
+
+
+
+
+        [HttpPost]
+        public JsonResult UploadImg()
+        {
+            HttpFileCollection Files = System.Web.HttpContext.Current.Request.Files;
+            if (Files.Count > 0)
+            {
+                try
+                {
+                    //多个for循环
+                    HttpPostedFile file = Files[0];
+                    string fileExtension = Path.GetExtension(file.FileName);
+                    string[] filetype = { ".jpg", ".jpeg", ".gif", ".png" }; //文件允许格式jpg、jpeg、gif、png
+                    bool checkType = Array.IndexOf(filetype, fileExtension) == -1;
+                    if (checkType)
+                    {
+                        return Json(new { code = 1, msg = "图片格式错误" });
+                    }
+
+                    if (file.ContentLength >= 50 * 1024 * 1024)
+                    {
+                        return Json(new { code = 1, msg = "上传视频大小不能超过50MB" });
+
+                    }
+
+                    string fileName = $"v_{Guid.NewGuid().ToString("N")}{fileExtension}";
+                    string uploadId = Guid.NewGuid().ToString();
+                    byte[] buffer = new byte[file.ContentLength];
+                    file.InputStream.Read(buffer, 0, buffer.Length);
+                    string img = Convert.ToBase64String(buffer);
+                    if (this._iUserImageInfoService.Insert(new Dtos.Dtos.UserImageInfoDto() { MongodbImgId = uploadId, ImageBase64 = img }))
+                        return Json(new { code = 0, msg = "上传成功", fileName = img, objectId = uploadId });
+                }
+                catch (Exception e)
+                {
+                    return Json(new { code = 1, msg = e.Message });
+                }
+
+            }
+
+            return Json(new { code = 1, msg = "请选择图片" });
+
         }
     }
 }
