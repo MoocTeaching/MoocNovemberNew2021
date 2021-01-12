@@ -39,9 +39,7 @@
         <input type="text" name="department" class="department" placeholder="请输入部门" id="departmentId"> <br>
 
         <label for="intro">简介</label> <br />
-
-        <textarea type="text" name="intro" class="intro" placeholder="请输入简介" id="introId"></textarea>
-        <br>
+        <textarea type="text" name="intro" class="intro" placeholder="请输入简介" id="introId"></textarea> <br>
 
         <button onclick="submit()" class="submit">提交</button> <br />
         <a class="backlink" href="../teacher">返回列表</a>
@@ -85,6 +83,7 @@
         parm.Company = company;
         parm.Department = department;
         parm.Introduction = intro;
+        parm.MongodbImgId = fileName.value;
 
         $.ajax({
             url: "@Url.Content("~/Teacher/Create")",

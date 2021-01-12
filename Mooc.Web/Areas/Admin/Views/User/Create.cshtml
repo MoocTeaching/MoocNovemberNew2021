@@ -42,15 +42,18 @@
 
         <label for"role">用户角色</label>
         <select name="role" id="roleId">
+            <option value="0">选择角色</option>
             <option value="student">学生</option>
             <option value="teacher">老师</option>
         </select>
         <br />
-        <label for="teacher">教员姓名</label>
-        <select name="teacher" id="teacherId">
+        <div id="teacherdiv">
+            <label for="teacher">教员姓名</label> <br />
+            @*<select name="teacher" id="teacherId">
             <option>--请选择教师--</option>
-        </select>
-
+            </select>*@
+            @Html.DropDownList("teacher", new SelectList(Enumerable.Empty<SelectListItem>())) <br />
+        </div>
         <label for"major">专业</label> <br />
         <input type="text" name="major" class"major" placeholder="请输入专业" id="majorId" /><br>
         <button onclick="submit()" class="submit">提交</button>
@@ -62,31 +65,48 @@
 <script>
     search();
     function search() {
+        var x = document.getElementById("teacherdiv")
+        x.style.display = "block";
+
         $.ajax({
             url: "@Url.Content("~/Admin/Teacher/GetTeacherList")",
             type: "POST",
             dataType: "json",
             success: function (res) {
-                debugger;
                 if (res.code == 0) {
                     alert(res.msg);
                     return;
                 }
 
-                for (var i = 0; i < res.data.length; i++) {
-                    var item = res.data[i];
+                //for (var i = 0; i < res.data.length; i++) {
+                //    var item = res.data[i];
 
-                    $('#teacherId').append(item.TeacherName);
-                }
-                //$.each(res.data, function () {
-                //    $("#teacherId").append($("<option></option>").val(value.Id).html(value.TeacherName));
-                //});
+                //    $('#teacher').append(item.TeacherName);
+                //}
+                $.each(res.data, function () {
+                    $("#teacher").append($("<option></option>").val(this.Id).html(this.TeacherName));
+                });
             },
             error: function (Result) {
                 alert("Error");
             }
         });
-    };
+       
+
+        $("#roleId").change(function () {
+            $("#roleId option:selected").click(function () {
+                var selectrole = $(this).val();
+                
+                if (selectrole === "老师") {
+                    if (x.style.display === "block") {
+                        x.style.display = "none";
+                    } else {
+                        x.style.display = "block";
+                    }
+                }
+            })
+        });
+    }
 
     function myFunction(gender) {
         //document.getElementById("result").value = browser;

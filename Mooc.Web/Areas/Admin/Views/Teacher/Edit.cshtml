@@ -1,5 +1,5 @@
 ﻿
-@Model CreateOrUpdateTeacherDto
+@*@Model CreateOrUpdateTeacherDto*@
 
 @{
     Layout = null;
@@ -11,32 +11,41 @@
     <title>编辑教师</title>
     @*responsive website*@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/plupload/plupload.full.min.js"></script>
+    <script src="~/Scripts/plupload/zh_CN.js"></script>
 </head>
 
 <body>
     <h1>编辑 教师</h1>
     <div class="form">
+        <div id="dataBind"></div>
+
         <label for="username">教师 姓名</label> <br />
         <input type="text" name="username" class="username" id="usernametext" value="@Model.TeacherName"> <br />
+
         <label for="level">级别</label> <br>
         <input type="text" name="level" class="level" id="levelId" value="@Model.Level"> <br>
+
         <label for="company">工作单位</label> <br>
         <input type="text" name="company" class="level" id="companyId" value="@Model.Company"> <br>
+
         <label for="department">部门</label> <br>
         <input type="text" name="department" class="department" id="departmentId" value="@Model.Department"> <br>
+
         <label for="intro">简介</label> <br />
-   
-        <textarea type="text" name="intro" class="intro" id="introId"> @Model.Introduction </textarea>
-        <br>
+        <textarea type="text" name="intro" class="intro" id="introId"> @Model.Introduction </textarea>   <br>
+
         <button onclick="submit()" class="submit">修改</button> <br />
         <a class="backlink" href="../index">返回列表</a>
-
 
         <input type="hidden" name="department" class="Id" id="Id" value="@Model.Id"> <br>
     </div>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 </body>
 </html>
+
+
 <script>
     function submit() {
         var teacherName = $.trim($("#usernametext").val());
@@ -91,4 +100,6 @@
         })
 
     }
+
+
 </script>

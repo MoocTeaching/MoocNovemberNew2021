@@ -119,6 +119,8 @@ namespace Mooc.Web.Areas.Admin.Controllers
                     addTeacher.Company = createOrUpdateTeacherDto.Company;
                     addTeacher.Introduction = createOrUpdateTeacherDto.Introduction;
                     addTeacher.AddTime = DateTime.Now;
+                    addTeacher.MongodbImgId = createOrUpdateTeacherDto.MongodbImgId;
+
                     await this._teacherService.Add(addTeacher);
 
                     return Json(new { code = 0 });
@@ -135,6 +137,8 @@ namespace Mooc.Web.Areas.Admin.Controllers
         public async Task<ActionResult> Edit(int id)
         {
             var teacher = await _teacherService.GetEditTeacher(id);
+            var teacherImage = await this._iUserImageInfoService.Get(teacher.MongodbImgId);
+
             return View(teacher);
         }
 
