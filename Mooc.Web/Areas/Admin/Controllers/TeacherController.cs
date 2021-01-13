@@ -119,6 +119,7 @@ namespace Mooc.Web.Areas.Admin.Controllers
                     addTeacher.Company = createOrUpdateTeacherDto.Company;
                     addTeacher.Introduction = createOrUpdateTeacherDto.Introduction;
                     addTeacher.AddTime = DateTime.Now;
+                    addTeacher.MongodbImgId = createOrUpdateTeacherDto.MongodbImgId;
                     await this._teacherService.Add(addTeacher);
 
                     return Json(new { code = 0 });

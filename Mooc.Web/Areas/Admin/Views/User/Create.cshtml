@@ -9,6 +9,9 @@
     <title>创建用户</title>
     @*responsive website*@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
 </head>
 <body>
     <h1>创建 用户</h1>
@@ -35,10 +38,10 @@
         </div>
 
         @*<input type="radio" name="male" class="gender" onclick="myFunction(this.value)" value="male" id="genderId" />
-        <label for="male">Male</label><br>
+            <label for="male">Male</label><br>
 
-        <input type="radio" name="female" class="gender" onclick="myFunction(this.value)" value="female" id="genderId" />
-        <label for="female">Female</label><br>*@
+            <input type="radio" name="female" class="gender" onclick="myFunction(this.value)" value="female" id="genderId" />
+            <label for="female">Female</label><br>*@
 
         <label for"role">用户角色</label>
         <select name="role" id="roleId">
@@ -50,16 +53,44 @@
         <select name="teacher" id="teacherId">
             <option>--请选择教师--</option>
         </select>
+        <a href="javascript:void(0)" onclick="addTh()" id="addTh">添加老师</a>
 
         <label for"major">专业</label> <br />
         <input type="text" name="major" class"major" placeholder="请输入专业" id="majorId" /><br>
         <button onclick="submit()" class="submit">提交</button>
         <a class="backlink" href="../user">返回列表</a>
     </div>
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+    <div class="modal fade" id="selectTDiv">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title" align="center">请选择教师</h4>
+
+                    <div id="ths">
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+
+
 </body>
 </html>
 <script>
+
+    function addTh() {
+        $.get("",fucn)
+        $('#selectTDiv').modal('show');
+    }
+
     search();
     function search() {
         $.ajax({

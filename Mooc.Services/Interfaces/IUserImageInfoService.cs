@@ -11,5 +11,10 @@ namespace Mooc.Services.Interfaces
     public interface IUserImageInfoService : IDependency
     {
         bool Insert(UserImageInfoDto userImageInfoDto);
+     
+
+        Task<UserImageInfoDto> Get(string mongodbImageID);
     }
+
+
 }

@@ -17,9 +17,11 @@ namespace Mooc.Services.Service
     public class TeacherService : ITeacherService
     {
         private DataContext _db;
-        public TeacherService(IDataContextProvider dataContextProvider)
+        private IUserImageInfoService _userImageInfoService;
+        public TeacherService(IDataContextProvider dataContextProvider, IUserImageInfoService userImageInfoService)
         {
             this._db = dataContextProvider.GetDataContext();
+            this._userImageInfoService = userImageInfoService;
         }
 
         //Add
@@ -70,7 +72,22 @@ namespace Mooc.Services.Service
 
                 if (teacher == null)
                     return null;
-                return Mapper.Map<CreateOrUpdateTeacherDto>(teacher);
+
+
+                var teacherDto = Mapper.Map<CreateOrUpdateTeacherDto>(teacher);
+                //获取图片
+                if (string.IsNullOrEmpty(teacherDto.MongodbImgId))
+                {
+                    return teacherDto;
+                }
+
+                var userImageInfoDto = await _userImageInfoService.Get(teacherDto.MongodbImgId);
+                if (userImageInfoDto != null)
+                {
+                     teacherDto.ImageBase64Data = userImageInfoDto.ImageBase64;
+
+                }
+                return teacherDto;
             }
             catch (DbEntityValidationException e)
             {
@@ -95,7 +112,7 @@ namespace Mooc.Services.Service
             {
                 var teacher = this._db.Teachers.FirstOrDefault(p => p.Id == updateTeacher.Id);
 
-                Mapper.Map<CreateOrUpdateTeacherDto,Teacher>(updateTeacher, teacher);
+                Mapper.Map<CreateOrUpdateTeacherDto, Teacher>(updateTeacher, teacher);
                 teacher.AddTime = DateTime.Now;
                 //var teacher = Mapper.Map<Teacher>(updateTeacher);
                 //this._db.Teachers.Add(teacher);

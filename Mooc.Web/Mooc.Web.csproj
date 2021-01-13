@@ -210,6 +210,10 @@
     <Content Include="Content\unicorn.main.css" />
     <Content Include="Content\unicorn.red.css" />
     <Content Include="Content\uniform.css" />
+    <Content Include="css\animate.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\materialdesignicons.min.css" />
+    <Content Include="css\style.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

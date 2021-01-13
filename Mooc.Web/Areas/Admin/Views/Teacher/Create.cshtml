@@ -24,7 +24,10 @@
             <input type="hidden" value="" id="fileName" />
         </div>
 
-        <div id="dataBind"></div>
+        <div id="dataBind">
+
+
+        </div>
 
         <label for="username">教师 姓名</label> <br />
         <input type="text" name="username" class="username" placeholder="请输入用户名" id="usernametext"> <br />
@@ -85,6 +88,7 @@
         parm.Company = company;
         parm.Department = department;
         parm.Introduction = intro;
+        parm.MongodbImgId = $.trim($("#fileName").val());;
 
         $.ajax({
             url: "@Url.Content("~/Teacher/Create")",

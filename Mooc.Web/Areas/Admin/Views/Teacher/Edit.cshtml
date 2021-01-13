@@ -1,21 +1,33 @@
 ﻿
-@Model CreateOrUpdateTeacherDto
+@model CreateOrUpdateTeacherDto
 
 @{
     Layout = null;
 }
-<!DOCTYPE html>
+@*<!DOCTYPE html>*@
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8">
     <title>编辑教师</title>
     @*responsive website*@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/plupload/plupload.full.min.js"></script>
+    <script src="~/Scripts/plupload/zh_CN.js"></script>
 </head>
 
 <body>
     <h1>编辑 教师</h1>
     <div class="form">
+        <div id="uploader">
+            <a id="uploadimg" class="btn btn-default" style="border:1px solid">上传用户照片</a>
+            <input type="hidden" value="" id="fileName" />
+        </div>
+
+        <div id="dataBind">
+
+            <img src='data:image/jpeg;base64,@Model.ImageBase64Data' width='100' onerror="javascript:this.src='@Url.Content("~/Images/logoError.png")'">
+        </div>
         <label for="username">教师 姓名</label> <br />
         <input type="text" name="username" class="username" id="usernametext" value="@Model.TeacherName"> <br />
         <label for="level">级别</label> <br>
@@ -25,7 +37,7 @@
         <label for="department">部门</label> <br>
         <input type="text" name="department" class="department" id="departmentId" value="@Model.Department"> <br>
         <label for="intro">简介</label> <br />
-   
+
         <textarea type="text" name="intro" class="intro" id="introId"> @Model.Introduction </textarea>
         <br>
         <button onclick="submit()" class="submit">修改</button> <br />
@@ -73,12 +85,12 @@
         parm.Department = department;
         parm.Introduction = intro;
         parm.Id = $.trim($("#Id").val());
+        parm.MongodbImgId = $.trim($("#fileName").val());;
 
         $.ajax({
             url: "@Url.Content("~/Admin/Teacher/Edit")",
             //data: { "TeacherName": teacherName, "Level": level, "Company": company, "Department": department, "Introduction": intro },
             data: parm,
-
             type: "POST", dataType: 'json',
             success: function (data) {
                 if (data.code == 0) {
@@ -91,4 +103,83 @@
         })
 
     }
+
+     function initUpload() {
+
+        var uploader_file = new plupload.Uploader({//创建实例的构造方法
+            runtimes: 'gears,html5,html4,flash', //上传插件初始化选用那种方式的优先级顺序
+            browse_button: "uploadimg", // 上传按钮
+            url: "@Url.Content("~/Admin/Teacher/UploadImg")", //远程上传地址
+            @*flash_swf_url: "@Url.Content("~/Scripts/plupload/Moxie.swf")",*@
+            filters: {
+                max_file_size: '50mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+                mime_types: [//允许文件上传类型
+                    { title: "图片文件", extensions: "jpg,jpeg,gif,png" }//"mp4,flv,rmvb,mpeg,mov,wmv"
+                ]
+            },
+            multipart_params: {  'type': '1' },//往后台传参数
+            multi_selection: false, //true:ctrl多文件上传, false 单文件上传
+            init: {
+                FilesAdded: function (up, files) { //文件上传前
+
+                    uploader_file.start();
+
+                },
+
+                UploadProgress: function (up, file) { //上传中，显示进度条
+
+                },
+                FileUploaded: function (up, file, info) { //文件上传成功的时候触发
+                    debugger
+                    var data = eval("(" + info.response + ")");//解析返回的json数据
+                    if (data && data.code == 0) {
+                        $("#fileName").val(data.objectId);
+                       
+                        alert("上传成功");
+                        var _html = "";
+                       
+                        _html += "<img src='data:image/jpeg;base64," + data.fileName + "' width='100' onerror=\"javascript: this.src = '@Url.Content("~/Images/logoError.png")'\"  >";
+                        $("#dataBind").html(_html);
+                    }
+                    else {
+                        //这两个alert拼写错了，所以一直没跑起来
+                        alert(data.msg);
+                    }
+                },
+                UploadComplete: function (uploader, files) {
+                    console.log("UploadComplete", files);
+
+                },
+                Error: function (up, err) { //上传出错的时候触发
+                    $("#upload-program").hide();
+                    var errorCode = err.code;
+                    switch (errorCode) {
+                        case -600:
+                            alert("抱歉，上传失败！您所上传的视频超过50mb！");
+                            break;
+                        case -601:
+                            alert("请上传 jpg、jpeg、gif、png 格式文件！");
+                            break;
+                        case -602:
+                            alert("文件选择重复! ");
+                            break;
+                        case -200:
+                            alert("发生http网络错误! ");
+                            break;
+                        case -400:
+                            alert("发生安全问题而产生的错误! ");
+                            break;
+                        default:
+                            alert("上传失败! ");
+                            break;
+                    }
+                }
+            }
+        });
+        uploader_file.init();
+    }
+
+    $(function () {
+        initUpload();
+    })
 </script>

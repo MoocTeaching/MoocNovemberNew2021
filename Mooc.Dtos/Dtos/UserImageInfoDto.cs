@@ -8,9 +8,13 @@ namespace Mooc.Dtos.Dtos
 {
     public class UserImageInfoDto
     {
+
+     
         public string ImageBase64 { get; set; }
 
 
         public string MongodbImgId { get; set; }
+
+       public object Id { get; set; }
     }
 }

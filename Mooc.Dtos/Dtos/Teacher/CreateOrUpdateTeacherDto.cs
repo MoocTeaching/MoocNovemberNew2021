@@ -11,7 +11,6 @@ namespace Mooc.Dtos.Teacher
     public class CreateOrUpdateTeacherDto : BaseEntityDto
     {
         
-
         public long ProfessorId { get; set; }
 
         [Required(ErrorMessage = "教师姓名必填")]
@@ -38,6 +37,9 @@ namespace Mooc.Dtos.Teacher
         public DateTime AddTime { get; set; }
 
         public string MongodbImgId { get; set; }
+
+        public string ImageBase64Data { get; set; }
+
 
     }
 }
