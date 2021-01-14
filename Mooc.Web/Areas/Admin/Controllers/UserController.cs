@@ -30,11 +30,17 @@ namespace Mooc.Web.Areas.Admin.Controllers
         }
 
         private IUserService _userService;
+        private ITeacherService _teacherService;
+
         public UserController(IUserService userService)
         {
             this._userService = userService;
         }
 
+        //public UserController(ITeacherService teacherService)
+        //{
+        //    this._teacherService = teacherService;
+        //}
         public ActionResult bvg()
         {
             return View();
@@ -43,6 +49,12 @@ namespace Mooc.Web.Areas.Admin.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
+            //var list = _teacherService.GetList();
+
+            //List<SelectListItem> teacherDropDownList = new List<SelectListItem>();
+            //teacherDropDownList = list.Select(c => new SelectListItem() { Text = c.TeacherName, Value = c.Id.ToString() }).ToList();
+            //teacherDropDownList.Add(new SelectListItem { Value = "0", Text = "Select", Selected = true });
+            //ViewBag.dropDownList = teacherDropDownList;
             return View();
         }
 

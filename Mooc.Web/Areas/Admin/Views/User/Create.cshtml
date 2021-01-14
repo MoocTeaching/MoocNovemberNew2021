@@ -39,20 +39,22 @@
 
         <input type="radio" name="female" class="gender" onclick="myFunction(this.value)" value="female" id="genderId" />
         <label for="female">Female</label><br>*@
-
-        <label for"role">用户角色</label>
+    <div>
+        <label for"role">用户角色</label><br />
         <select name="role" id="roleId">
             <option value="0">选择角色</option>
             <option value="student">学生</option>
             <option value="teacher">老师</option>
         </select>
+    </div>
         <br />
         <div id="teacherdiv">
             <label for="teacher">教员姓名</label> <br />
             @*<select name="teacher" id="teacherId">
             <option>--请选择教师--</option>
             </select>*@
-            @Html.DropDownList("teacher", new SelectList(Enumerable.Empty<SelectListItem>())) <br />
+            @Html.DropDownList("teacher", new SelectList(Enumerable.Empty<SelectListItem>()),"--选择老师--") <br />
+
         </div>
         <label for"major">专业</label> <br />
         <input type="text" name="major" class"major" placeholder="请输入专业" id="majorId" /><br>
@@ -66,7 +68,7 @@
     search();
     function search() {
         var x = document.getElementById("teacherdiv")
-        x.style.display = "block";
+        x.style.display = "none";
 
         $.ajax({
             url: "@Url.Content("~/Admin/Teacher/GetTeacherList")",
@@ -93,20 +95,22 @@
         });
        
 
-        $("#roleId").change(function () {
-            $("#roleId option:selected").click(function () {
-                var selectrole = $(this).val();
-                
-                if (selectrole === "老师") {
-                    if (x.style.display === "block") {
-                        x.style.display = "none";
-                    } else {
-                        x.style.display = "block";
-                    }
-                }
-            })
-        });
+      
     }
+
+    $("#roleId").change(function () {
+        $("#roleId option:selected").click(function () {
+            var selectrole = $(this).val();
+            debugger;
+            if (selectrole === "老师") {
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                } else {
+                    x.style.display = "block";
+                }
+            }
+        })
+    });
 
     function myFunction(gender) {
         //document.getElementById("result").value = browser;
